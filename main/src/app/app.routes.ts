@@ -1,6 +1,7 @@
   import { Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { InsuranceListComponent } from './pages/insurance-list/insurance-list.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
       },
+      {
+        path: 'insurance',
+        component:InsuranceListComponent
+      }
     ],
   },
   {
