@@ -1,0 +1,7 @@
+export interface UserData {
+  id: number;           // Identifiant de l'utilisateur
+  imagePath: string;    // Chemin de l'image de l'utilisateur
+  uname: string;        // Nom complet de l'utilisateur
+  budget?: number;      // Budget ou attribut facultatif
+  priority?: string;    // Priorité ou statut facultatif
+}

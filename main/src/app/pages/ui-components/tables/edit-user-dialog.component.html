@@ -1,0 +1,15 @@
+<h3>Modifier l'utilisateur</h3>
+<mat-form-field>
+  <input matInput [(ngModel)]="data.name" placeholder="Nom">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]="data.surname" placeholder="Prénom">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]="data.email" placeholder="Email">
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]="data.job" placeholder="Poste">
+</mat-form-field>
+<button mat-raised-button (click)="saveUser()">Sauvegarder</button>
+<button mat-raised-button (click)="cancel()">Annuler</button>

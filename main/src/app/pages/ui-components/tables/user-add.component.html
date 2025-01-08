@@ -1,0 +1,60 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Ajouter un utilisateur</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Prénom</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="name" placeholder="Votre prénom" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Nom</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="surname" placeholder="Votre nom" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Email</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput type="email" formControlName="email" placeholder="Votre email" />
+          </mat-form-field>
+        </div>
+      
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Mot de passe</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Votre mot de passe" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">CIN (ID national)</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="cin" placeholder="Votre CIN" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Date de naissance</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="birthDate" placeholder="jj/mm/aaaa" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Job</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="job" placeholder="Votre poste" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" type="submit">Soumettre</button>
+        <button mat-stroked-button color="warn" (click)="onCancel()">Annuler</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

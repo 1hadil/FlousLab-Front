@@ -1,0 +1,18 @@
+// src/app/models/user.model.ts
+export class User {
+  id: number;
+  name: string;
+  surname: string;
+  email: string;
+  role: string;
+  isEmailVerified: boolean;
+
+  constructor(id: number, name: string, surname: string, email: string, role: string, isEmailVerified: boolean) {
+    this.id = id;
+    this.name = name;
+    this.surname = surname;
+    this.email = email;
+    this.role = role;
+    this.isEmailVerified = isEmailVerified;
+  }
+}
