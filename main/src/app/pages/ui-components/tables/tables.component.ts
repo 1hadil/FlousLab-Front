@@ -6,46 +6,18 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { ClaimService } from './services/claim.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddclaimComponent } from './adddialog/addclaim/addclaim.component';
 
-// table 1
-export interface productsData {
+// Claim interface
+export interface Claim {
   id: number;
-  imagePath: string;
-  uname: string;
-  budget: number;
-  priority: string;
+  date: string;
+  subject: string;
+  description: string;
+  status: string;
 }
-
-const PRODUCT_DATA: productsData[] = [
-  {
-    id: 1,
-    imagePath: 'assets/images/products/dash-prd-1.jpg',
-    uname: 'iPhone 13 pro max-Pacific Blue-128GB storage',
-    budget: 180,
-    priority: 'confirmed',
-  },
-  {
-    id: 2,
-    imagePath: 'assets/images/products/dash-prd-2.jpg',
-    uname: 'Apple MacBook Pro 13 inch-M1-8/256GB-space',
-    budget: 90,
-    priority: 'cancelled',
-  },
-  {
-    id: 3,
-    imagePath: 'assets/images/products/dash-prd-3.jpg',
-    uname: 'PlayStation 5 DualSense Wireless Controller',
-    budget: 120,
-    priority: 'rejected',
-  },
-  {
-    id: 4,
-    imagePath: 'assets/images/products/dash-prd-4.jpg',
-    uname: 'Amazon Basics Mesh, Mid-Back, Swivel Office',
-    budget: 160,
-    priority: 'confirmed',
-  },
-];
 
 @Component({
   selector: 'app-tables',
@@ -62,7 +34,66 @@ const PRODUCT_DATA: productsData[] = [
   templateUrl: './tables.component.html',
 })
 export class AppTablesComponent {
-  // table 1
-  displayedColumns1: string[] = ['assigned', 'name', 'priority', 'budget'];
-  dataSource1 = PRODUCT_DATA;
+  displayedColumns: string[] = ['subject', 'date', 'status', 'description', 'actions']; // Add 'description' column
+  dataSource: Claim[] = [];
+
+  constructor(private claimService: ClaimService, private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.loadClaims();
+  }
+
+  // Load the claims data
+  loadClaims(): void {
+    this.claimService.getAllClaims().subscribe({
+      next: (claims) => {
+        console.log(claims);
+        this.dataSource = claims; // Assign the response to dataSource
+      },
+      error: (error) => {
+        console.error('Error loading claims:', error);
+      }
+    });
+  }
+
+   
+   // Open the modal dialog to add a new claim
+   addClaim(): void {
+    const dialogRef = this.dialog.open(AddclaimComponent, {
+      width: '400px', // Optionally set the dialog width
+    });
+
+    // After the modal closes, reload the claims if the claim was successfully added
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadClaims(); // Reload claims
+      }
+    });
+  }
+
+  // tables.component.ts
+  updateClaimStatusToCanceled(id: number): void {
+  // Find the claim by id
+  const claimToUpdate = this.dataSource.find(claim => claim.id === id);
+
+  if (claimToUpdate) {
+    // Update the status to "annulés"
+    claimToUpdate.status = 'annules';
+
+    // Send the entire claim object with the updated status
+    this.claimService.updateClaim(id, claimToUpdate).subscribe({
+      next: (response) => {
+        console.log('Claim status updated to annulés');
+        this.loadClaims(); // Reload claims after updating
+      },
+      error: (error) => {
+        console.error('Error updating claim status:', error);
+      }
+    });
+  } else {
+    console.error('Claim not found!');
+  }
+}
+
+  
 }

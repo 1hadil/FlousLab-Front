@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
-
+import { Chart } from 'chart.js'; 
 import {
     ApexChart,
     ChartComponent,
@@ -19,6 +19,20 @@ import {
 } from 'ng-apexcharts';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { TransactionService } from 'src/app/pages/ui-components/forms/Transactionservice/transaction.service';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarController, BarElement, Title, Tooltip, Legend } from 'chart.js';
+
+// Register the necessary components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarController,  
+  BarElement,     // Register BarElement
+  Title,
+  Tooltip,
+  Legend
+);
+
 
 export interface salesprofitChart {
     series: ApexAxisChartSeries;
@@ -39,6 +53,14 @@ interface month {
     value: string;
     viewValue: string;
 }
+interface Transaction {
+    id: number;
+    type: string;
+    date: string | null;
+    amount: number;
+    status: string;
+  }
+  
 
 
 @Component({
@@ -56,8 +78,9 @@ export class AppSalesProfitComponent {
         { value: 'apr', viewValue: 'Oct 2024' },
         { value: 'june', viewValue: 'Nov 2024' },
     ];
+    chartData: { labels: string[]; datasets: { label: string; data: any[]; backgroundColor: string; borderColor: string; borderWidth: number; }[]; };
 
-    constructor() {
+    constructor(private transactionService:TransactionService) {
         this.salesprofitChart = {
 
             series: [
@@ -215,4 +238,92 @@ export class AppSalesProfitComponent {
             },
         };
     }
+    ngOnInit(){
+        this.loadTransactions()
+         
+    }
+
+    loadTransactions() {
+        this.transactionService.getAllTransactions().subscribe({
+          next: (data) => {
+            if (data && Array.isArray(data) && data.length > 0) {
+              // Grouping amounts by date
+              const groupedData = this.groupByDate(data);
+      
+              // Prepare labels (dates) and dataset (sum of amounts)
+              const labels = Object.keys(groupedData);
+              const amounts = labels.map(date => groupedData[date]);
+      
+              // Prepare data for the chart
+              this.chartData = {
+                labels: labels,
+                datasets: [{
+                  label: 'Transaction Amounts Over Time',
+                  data: amounts,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+                }]
+              };
+      
+              // Call the chart method after data is prepared
+              this.createChart();
+            } else {
+              console.log('No transactions found or invalid data');
+            }
+          },
+          error: (error) => {
+            console.error('Error fetching transactions:', error);
+          }
+        });
+      }
+      
+      groupByDate(data: Transaction[]) {
+        return data.reduce((acc: { [key: string]: number }, transaction: Transaction) => {
+          const date = transaction.date ? transaction.date : 'Unknown'; // Handle missing dates
+          if (!acc[date]) {
+            acc[date] = 0;
+          }
+          acc[date] += transaction.amount;
+          return acc;
+        }, {});
+      }
+      
+      createChart() {
+        const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+        const ctx = canvas?.getContext('2d');
+        
+        if (ctx) {
+          new ChartJS(ctx, {
+            type: 'bar',
+            data: this.chartData,
+            options: {
+              responsive: true,
+              scales: {
+                x: {
+                  type: 'category',  // Use the correct scale type
+                  title: {
+                    display: true,
+                    text: 'Date'
+                  }
+                },
+                y: {
+                  type: 'linear',  // Use the correct scale type
+                  title: {
+                    display: true,
+                    text: 'Amount'
+                  }
+                }
+              }
+            }
+          });
+        } else {
+          console.error('Chart element not found');
+        }
+      }
+      
+      
+      
+      
+      
 }

@@ -1,146 +1,88 @@
 <mat-card class="cardWithShadow">
   <mat-card-content>
-    <mat-card-title>Table</mat-card-title>
+    <mat-card-title>Liste des Réclamations</mat-card-title>
 
     <div class="table-responsive">
-      <table mat-table [dataSource]="dataSource1" class="w-100">
-        <!-- Position Column -->
-        <ng-container matColumnDef="assigned">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="f-w-600 mat-subtitle-1 f-s-14 p-l-0"
-          >
-            Product
+      <table mat-table [dataSource]="dataSource" class="w-100">
+        
+        <!-- Subject Column (Objet) -->
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14 p-l-0">
+            Objet
           </th>
           <td mat-cell *matCellDef="let element" class="p-l-0">
             <div class="d-flex align-items-center">
-              <img
-                [src]="element.imagePath"
-                alt="users"
-                width="60"
-                class="rounded"
-              />
               <div class="m-l-16">
                 <h6 class="mat-subtitle-1 f-s-14 f-w-600">
-                  {{ element.uname }}
+                  {{ element.subject }}
                 </h6>
               </div>
             </div>
           </td>
         </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="f-w-600 mat-subtitle-1 f-s-14"
-          >
-            Payment
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+            Date
           </th>
           <td mat-cell *matCellDef="let element" class="mat-body-1">
-            @if(element.budget >= 160) {
-            <h6 class="mat-body-1 f-s-16 m-b-4">
-              <span class="text-dark f-w-600">${{ element.budget }} </span>/ 499
-            </h6>
-            <span class="f-s-14 f-w-500 d-block m-b-4">Full paid</span>
-            <mat-progress-bar
-              mode="determinate"
-              value="40"
-              color="primary"
-            ></mat-progress-bar>
-            } @else if(element.budget > 119) {
-            <h6 class="mat-body-1 f-s-16 m-b-4">
-              <span class="text-dark f-w-600">${{ element.budget }} </span>/ 499
-            </h6>
-            <span class="f-s-14 f-w-500 d-block m-b-4">Partially paid</span>
-            <mat-progress-bar
-              mode="determinate"
-              value="40"
-              color="accent"
-            ></mat-progress-bar>
-            } @else if(element.budget < 100) {
-            <h6 class="mat-body-1 f-s-16 m-b-4">
-              <span class="text-dark f-w-600">${{ element.budget }} </span>/ 499
-            </h6>
-            <span class="f-s-14 f-w-500 d-block m-b-4">Cancelled</span>
-            <mat-progress-bar
-              mode="determinate"
-              value="40"
-              color="warn"
-            ></mat-progress-bar>
-            }
+            {{ element.date | date: 'shortDate' }}
           </td>
         </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="priority">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="f-w-600 mat-subtitle-1 f-s-14"
-          >
-            Status
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+            Statut
           </th>
           <td mat-cell *matCellDef="let element">
-            @if(element.priority == 'cancelled') {
-            <span
-              class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12"
-            >
-              {{ element.priority | titlecase }}
+            <span [ngClass]="{
+              'bg-light-warning': element.status === 'en cours',
+              'bg-light-error': element.status === 'annules',
+              'bg-light-success': element.status === 'confirmed'
+            }" class="text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+              {{ element.status | titlecase }}
             </span>
-            } @if(element.priority == 'rejected') {
-            <span
-              class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12"
-            >
-              {{ element.priority | titlecase }}
-            </span>
-            } @if(element.priority == 'confirmed') {
-            <span
-              class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12"
-            >
-              {{ element.priority | titlecase }}
-            </span>
-            }
           </td>
         </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="budget">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="f-w-600 mat-subtitle-1 f-s-14"
-          ></th>
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+            Description
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>{{ element.description }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+            Actions
+          </th>
           <td mat-cell *matCellDef="let element" class="mat-body-1">
-            <button
-              mat-icon-button
-              [matMenuTriggerFor]="menu"
-              aria-label="Example icon-button with a menu"
-            >
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More actions">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>edit</mat-icon>
-                <span>Edit</span>
-              </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="updateClaimStatusToCanceled(element.id)">
                 <mat-icon>delete</mat-icon>
-                <span>Delete</span>
+                <span>Cancel</span>
               </button>
             </mat-menu>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+    </div>
+
+    <!-- Add Claim Button -->
+    <div class="mt-2">
+      <button mat-raised-button color="primary" (click)="addClaim()">Add Claim</button>
     </div>
   </mat-card-content>
 </mat-card>

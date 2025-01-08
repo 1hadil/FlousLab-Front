@@ -19,6 +19,7 @@ import {
 } from 'ng-apexcharts';
 import { MatButtonModule } from '@angular/material/button';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { TransactionService } from 'src/app/pages/ui-components/forms/Transactionservice/transaction.service';
 
 export interface totalincomeChart {
     series: ApexAxisChartSeries;
@@ -46,8 +47,9 @@ export interface totalincomeChart {
 export class AppTotalIncomeComponent {
     @ViewChild('chart') chart: ChartComponent = Object.create(null);
     public totalincomeChart!: Partial<totalincomeChart> | any;
+    totaltransactions : number= 0
 
-    constructor() {
+    constructor(private transactionService: TransactionService) {
         this.totalincomeChart = {
 
             chart: {
@@ -99,4 +101,28 @@ export class AppTotalIncomeComponent {
 
         };
     }
+    
+    ngOnInit() {
+        this.loadTransactions();
+      }
+    loadTransactions() {
+        this.transactionService.getAllTransactions().subscribe({
+          next: (data) => {
+            if (data && Array.isArray(data) && data.length > 0) {
+              // Calculate the sum of amounts
+              const totalAmount = data.reduce((sum, transaction) => sum + transaction.amount, 0);
+      
+              console.log('Total Amount:', totalAmount);
+              // You can store the totalAmount if you want to display it somewhere in your component
+              this.totaltransactions = totalAmount; // Assuming you want to store it in a component property
+            } else {
+              console.log('No transactions found or invalid data');
+            }
+          },
+          error: (error) => {
+            console.error('Error fetching transactions:', error);
+            // Handle error gracefully (e.g., display an error message to the user)
+          }
+        });
+      }
 }

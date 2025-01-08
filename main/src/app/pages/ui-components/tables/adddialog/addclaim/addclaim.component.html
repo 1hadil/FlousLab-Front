@@ -1,0 +1,24 @@
+<h2 mat-dialog-title class="dialog-title">Add New Claim</h2>
+
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" class="transaction-form">
+
+    <!-- Subject Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Subject</mat-label>
+      <input matInput [(ngModel)]="subject" name="subject" required placeholder="Enter the subject">
+    </mat-form-field>
+
+    <!-- Description Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="description" name="description" required placeholder="Enter description"></textarea>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+</mat-dialog-actions>

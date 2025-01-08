@@ -10,10 +10,10 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
-    navCap: 'Ui Components',
+    navCap: 'FlousLab',
     divider: true
   },
-  {
+  /* {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',
     route: '/ui-components/badge',
@@ -37,18 +37,18 @@ export const navItems: NavItem[] = [
     displayName: 'Tooltips',
     iconName: 'solar:text-field-focus-line-duotone',
     route: '/ui-components/tooltips',
-  },
+  }, */
   {
-    displayName: 'Forms',
+    displayName: 'Transactions',
     iconName: 'solar:file-text-line-duotone',
     route: '/ui-components/forms',
   },
   {
-    displayName: 'Tables',
+    displayName: 'Reclamations',
     iconName: 'solar:tablet-line-duotone',
     route: '/ui-components/tables',
   },
-  {
+  /* {
     navCap: 'Auth',
     divider: true
   },
@@ -75,5 +75,5 @@ export const navItems: NavItem[] = [
     displayName: 'Sample Page',
     iconName: 'solar:planet-3-line-duotone',
     route: '/extra/sample-page',
-  },
+  }, */
 ];

@@ -17,6 +17,7 @@ import {
 } from 'ng-apexcharts';
 import { MatButtonModule } from '@angular/material/button';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { ClaimService } from 'src/app/pages/ui-components/tables/services/claim.service';
 
 export interface totalfollowersChart {
     series: ApexAxisChartSeries;
@@ -42,8 +43,9 @@ export interface totalfollowersChart {
 export class AppTotalFollowersComponent {
     @ViewChild('chart') chart: ChartComponent = Object.create(null);
     public totalfollowersChart!: Partial<totalfollowersChart> | any;
+    totalclaims:number=0
 
-    constructor() {
+    constructor(private claimservice:ClaimService) {
         this.totalfollowersChart = {
 
             series: [
@@ -126,4 +128,17 @@ export class AppTotalFollowersComponent {
             },
         };
     }
+    ngOnInit(){
+        this.loadclaims()
+    }
+    loadclaims(){
+        this.claimservice.getAllClaims().subscribe({
+            next: (response) => {
+              this.totalclaims=response.length
+            },
+            error: (error) => {
+              console.error('Error creating transaction:', error);
+            },
+          });
+        }
 }
