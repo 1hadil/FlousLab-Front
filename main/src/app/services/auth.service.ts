@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private baseUrl = `${environment.apiUrl}/auth`;
-  private apiUrl = 'http://localhost:8080/auth/login';
+  private apiUrl = 'http://localhost:8087/auth/login';
   constructor(private http: HttpClient) {}
 
   // Méthode pour l'inscription avec les nouveaux champs

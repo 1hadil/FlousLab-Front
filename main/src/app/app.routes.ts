@@ -3,6 +3,7 @@ import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { AppTablesComponent } from './pages/ui-components/tables/tables.component';
 import { UserAddComponent } from './pages/ui-components/tables/user-add.component';
+import { PredictionComponent } from './components/prediction/prediction.component';
 export const routes: Routes = [
   {
     path: '',
@@ -40,6 +41,9 @@ export const routes: Routes = [
         path: 'user/add',
          component: UserAddComponent,
       },
+      { path: 'predict', component: PredictionComponent },     // Route vers PredictionComponent
+
+
     ],
   },
   {

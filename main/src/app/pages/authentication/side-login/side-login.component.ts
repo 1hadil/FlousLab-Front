@@ -32,7 +32,7 @@ export class AppSideLoginComponent {
     private authService: AuthService
   ) {
     this.form = new FormGroup({
-      uname: new FormControl('', [Validators.required, Validators.email]),
+      uname: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }

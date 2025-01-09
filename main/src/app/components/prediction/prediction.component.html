@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>Fraud Detection</h2>
+    <p class="lead">Detect fraudulent transactions using machine learning.</p>
+  
+    <!-- Explication du dataset -->
+    <div class="explanation">
+        <h3>Explication du jeu de données</h3>
+        <p>Le jeu de données contient des transactions effectuées par des titulaires de cartes de crédit en septembre 2013, en Europe. Il comprend 492 fraudes sur un total de 284 807 transactions, ce qui le rend très déséquilibré.</p>
+        <p>Les caractéristiques V1, V2, ... V28 sont les composants principaux obtenus par Analyse en Composantes Principales (PCA), une technique de réduction de dimensions. Cela signifie que ces caractéristiques ont été extraites pour résumer l'information essentielle tout en réduisant la taille des données. Les seules caractéristiques non transformées sont le "Time" (temps) et le "Amount" (montant).</p>
+        <p>La caractéristique "Class" indique si la transaction est une fraude (1) ou non (0).</p>
+        
+        <h4>Explications des caractéristiques V1 et V20 :</h4>
+        <p><strong>V1 :</strong> Il s'agit de la première composante principale extraite à partir des caractéristiques d'origine. Comme les données sont transformées, la signification exacte de V1 n'est pas directement interprétable sans la transformation inverse, mais elle représente une combinaison linéaire des variables d'origine qui capture la variance maximale dans les données.</p>
+        
+        <p><strong>V20 :</strong> De même, V20 est une autre composante principale, représentant une autre combinaison linéaire de caractéristiques d'origine. Les valeurs de V20 peuvent être interprétées de manière similaire à celles de V1, mais elles dépendent des données spécifiques utilisées pour la transformation PCA. Cela peut indiquer une caractéristique comportementale ou temporelle, mais son interprétation exacte dépend du modèle de données.</p>
+        
+        <h4>Qu'est-ce que l'Analyse en Composantes Principales (PCA) ?</h4>
+        <p>L'Analyse en Composantes Principales (PCA) est une méthode statistique utilisée pour réduire la dimensionnalité des données tout en préservant autant que possible la variance des données. Elle crée de nouvelles variables (appelées composantes principales) qui sont des combinaisons linéaires des variables originales. PCA est souvent utilisée pour simplifier les jeux de données complexes et aider à identifier les motifs sous-jacents tout en réduisant les redondances dans les données. Cette technique est particulièrement utile lorsque de nombreuses caractéristiques sont fortement corrélées, comme dans ce jeu de données de transactions financières.</p>
+      </div>
+      
+  
+    <!-- Formulaire de prédiction -->
+    <form (ngSubmit)="onSubmit()" class="prediction-form">
+      <div class="input-group" *ngFor="let key of inputFields">
+        <label for="{{ key }}">{{ key }}:</label>
+        <input [(ngModel)]="inputData[key]" name="{{ key }}" type="number" required class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+  
+    <!-- Affichage de la prédiction -->
+    <div class="prediction-result">
+        <p *ngIf="prediction">
+          Prediction: {{ prediction }} ({{ predictionPercentage }}%)
+        </p>
+        <p *ngIf="!prediction">
+          Please enter the data and submit to get the prediction.
+        </p>
+      </div>
+      
+      
+  
+    <!-- Graphique explicatif -->
+    <div class="chart-container">
+        <canvas #fraudChartCanvas></canvas>
+      </div>
+      
+      
+  </div>
+  
