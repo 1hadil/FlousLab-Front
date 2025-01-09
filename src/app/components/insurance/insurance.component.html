@@ -1,0 +1,79 @@
+<mat-card >
+  <mat-card-title class="text-center">Insurance List</mat-card-title>
+  <mat-card-content>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th> Policy</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Coverage Amount</th>
+          <th>Client Premium</th>
+          <th>State</th>
+          <th>type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let insurance of insurances">
+          <td>{{ insurance.policy }}</td>
+          <td>{{ insurance.startDate | date }}</td>
+          <td>{{ insurance.endDate | date }}</td>
+          <td>{{ insurance.clientcoverageamount }}</td>
+          <td>{{ insurance.clientpremium }}</td>
+          <td>{{ insurance.state }}</td>
+          <td>{{ insurance.type }}</td>
+          <td>
+            <!-- Button to show user details in modal -->
+            <button mat-raised-button color="primary" (click)="openUserDetailsDialog(insurance.user)">
+              Show User
+            </button>
+            
+            <!-- Update Button -->
+            <button  mat-raised-button color="warn" routerLink="/ui-components/update-insurance/{{ insurance.idInsurance }}">
+              Update
+            </button>
+            
+            <!-- Delete Button -->
+            <button mat-raised-button color="dark" (click)="deleteInsurance(insurance.idInsurance)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+
+<div class="container mt-5">
+    <!-- Insurance List -->
+
+      <!-- Modal for displaying user details -->
+      <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="userModalLabel">User Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Name:</strong> {{ selectedUser.name }}</p>
+              <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+              <p><strong>Age:</strong> {{ selectedUser.age }}</p>
+              <p><strong>Job:</strong> {{ selectedUser.job || 'Not available' }}</p>
+              <p><strong>Account Locked:</strong> {{ selectedUser.accountLocked ? 'Yes' : 'No' }}</p>
+              <p><strong>Created Date:</strong> {{ selectedUser.createdDate | date }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+    <!-- Add New Insurance Form -->
+ 
+  </div>
+  

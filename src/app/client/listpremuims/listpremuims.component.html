@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h5 class="modal-title">List Premiums</h5>
+   
+  </div>
+  <div class="modal-body">
+    <div class="row g-3">
+      <div class="col-12 col-md-6" *ngFor="let premium of premiums">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Premium ID: {{ premium.idPremium }}</h5>
+            <p class="card-text">
+              <strong>Premium:</strong> {{ premium.amount }}
+            </p>
+            <p class="card-text">
+              <strong>Date:</strong> {{ premium.date }}
+            </p>
+            <p class="card-text">
+                <strong>Status:</strong> {{ premium.status }}
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a type="button" role="button" class="btn btn-secondary" routerLink="/ui-components/list-insurance">
+      Close
+    </a>
+  </div>
+  

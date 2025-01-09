@@ -1,0 +1,113 @@
+<div>
+    <button class="mb-3" mat-raised-button color="primary" (click)="open=true" >add formation</button>
+
+    <!-- Ajouter un Cours -->
+    <mat-card class="mat-elevation-z4"  *ngIf="open">
+      <mat-card-header>
+        <mat-card-title>add formation</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="newCourse.name" name="name" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="newCourse.description" name="description" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Date start</mat-label>
+            <input matInput [(ngModel)]="newCourse.startDate" type="date" name="startDate" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Date end</mat-label>
+            <input matInput [(ngModel)]="newCourse.endDate" type="date" name="endDate" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>level</mat-label>
+            <input matInput [(ngModel)]="newCourse.level" name="level" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addCourse()">add</button>
+          <button mat-raised-button color="warn" (click)="open=false">cancel</button>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <!-- Liste des Cours -->
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title>Formations List</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table class="table table-bordered">
+            <thead >
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date start</th>
+                <th>Date end</th>
+                <th>level</th>
+                <th>lesson</th>
+                <th>Contest</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of courses">
+                <td>{{ course.name }}</td>
+                <td>{{ course.description }}</td>
+                <td>{{ course.startDate }}</td>
+                <td>{{ course.endDate }}</td>
+                <td>{{ course.level }}</td>
+                <td>
+                    <button mat-raised-button color="primary" [routerLink]="'/ui-components/addcour/'+course.idCourse">add lesson</button>
+                  </td>
+                  <td>
+                    <button mat-raised-button color="primary" [routerLink]="'/ui-components/addcontest/'+course.idCourse">add contest</button>
+                  </td>
+                <td>
+                  <button mat-raised-button color="primary"(click)="selectCourse(course)">update</button>
+                  <button mat-raised-button color="warn" (click)="deleteCourse(course.idCourse!)">delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </mat-card-content>
+    </mat-card>
+  
+    <!-- Modifier un Cours -->
+    <mat-card *ngIf="selectedCourse" class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title>Update</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="selectedCourse.name" name="editName" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Description</mat-label>
+            <input matInput [(ngModel)]="selectedCourse.description" name="editDescription" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Date start</mat-label>
+            <input matInput [(ngModel)]="selectedCourse.startDate" type="date" name="editStartDate" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Date end</mat-label>
+            <input matInput [(ngModel)]="selectedCourse.endDate" type="date" name="editEndDate" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>level</mat-label>
+            <input matInput [(ngModel)]="selectedCourse.level" name="editLevel" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="updateCourse()">Update</button>
+            <button mat-raised-button color="warn" (click)="selectedCourse = null">cancel</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

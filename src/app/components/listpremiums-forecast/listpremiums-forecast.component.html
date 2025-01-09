@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h5 class="modal-title">List Premiums</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="row g-3">
+      <div class="col-12 col-md-6" *ngFor="let premium of premiums">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Premium ID: {{ premium.id }}</h5>
+            <p class="card-text">
+              <strong>Premium:</strong> {{ premium.premium }}
+            </p>
+            <p class="card-text">
+              <strong>Date:</strong> {{ premium.date }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a type="button" role="button" class="btn btn-secondary" routerLink="/ui-components/forecast">
+      Close
+    </a>
+  </div>
+  

@@ -1,0 +1,33 @@
+.container {
+    padding: 20px;
+  }
+  
+  .add-contest-card {
+    margin-bottom: 20px;
+  }
+  
+  .add-contest-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .contest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .contest-card {
+    width: 300px;
+  }
+  

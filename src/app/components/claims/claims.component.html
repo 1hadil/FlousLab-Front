@@ -1,0 +1,92 @@
+<div class="container">
+    <h1 class="text-center">Claims Management</h1>
+  
+
+  
+    <!-- Liste des réclamations -->
+    <mat-card *ngIf="!selectinssurance && !selectedClaim">
+      <mat-card-title class="text-center">Claims List</mat-card-title>
+      <mat-card-content>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+                <th>ID</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Details</th>
+              <th>Email user</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let claim of claims">
+                <td>{{ claim.idClaim }}</td>
+              <td>{{ claim.date }}</td>
+              <td>{{ claim.amount }}</td>
+              <td>{{ claim.status }}</td>
+              <td>{{ claim.details }}</td>
+              <td>{{ claim.user?.email }}</td>
+              <td>
+                   <!-- Modifier -->
+            <button mat-raised-button color="dark" (click)="editClaim(claim)">Update</button>
+            <!-- Afficher -->
+            <button mat-raised-button color="primary" (click)="viewClaim(claim)">See Insurance</button>
+            <!-- Supprimer -->
+            <button mat-raised-button color="warn" (click)="deleteClaim(claim.idClaim)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+    <!-- Bouton pour voir la liste des assurances -->
+ 
+    <mat-card *ngIf="selectedClaim">
+        <mat-card-title class="text-center">Update Claim</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="claimForm" (ngSubmit)="submitClaim()">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput formControlName="date" type="date" required />
+            </mat-form-field>
+      
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Amount</mat-label>
+              <input matInput formControlName="amount" type="text" required />
+            </mat-form-field>
+      
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Details</mat-label>
+              <input matInput formControlName="details" type="text" required />
+            </mat-form-field>
+      
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status" required>
+                  <mat-option value="Pending">Pending</mat-option>
+                  <mat-option value="Accepted">Accepted</mat-option>
+                  <mat-option value="Rejected">Rejected</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!claimForm.valid">Modifier Claim</button>
+            <button mat-raised-button color="warn" type="button" (click)="closeForm()">Annuler</button>  <!-- Nouveau bouton pour fermer -->
+      
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+        <mat-card *ngIf="selectinssurance && selectinssurance.insurance">
+          <mat-card-title class="text-center">Insurance Details</mat-card-title>
+          <mat-card-content>
+            <p><strong>Policy:</strong> {{ selectinssurance.insurance.policy }}</p>
+            <p><strong>Start Date:</strong> {{ selectinssurance.insurance.startDate }}</p>
+            <p><strong>End Date:</strong> {{ selectinssurance.insurance.endDate }}</p>
+            <p><strong>Amount Covered:</strong> {{ selectinssurance.insurance.clientcoverageamount }}</p>
+            <p><strong>Premium:</strong> {{ selectinssurance.insurance.clientpremium }}</p>
+            <p><strong>State:</strong> {{ selectinssurance.insurance.state }}</p>
+
+            <button mat-raised-button color="warn" (click)="closeInsuranceDetails()">Close</button>
+          </mat-card-content>
+        </mat-card>
+ 

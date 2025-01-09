@@ -1,0 +1,18 @@
+<div class="card-container">
+  <mat-card *ngFor="let stock of stocks" class="stock-card">
+    <mat-card-header>
+      <div mat-card-avatar class="stock-avatar"></div>
+      <mat-card-title>{{ stock.companyName }}</mat-card-title>
+      <mat-card-subtitle>{{ stock.symbol }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Current Price:</strong> {{ stock.currentPrice | currency }}</p>
+      <p><strong>Market Cap:</strong> {{ stock.marketCap | currency }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a  mat-button color="warn" [routerLink]="['/ui-components/addInsurance', user.id, stock.idStock]">Add Insurance</a>
+
+      <button mat-button color="warn" [routerLink]="['/ui-components/addprediction', stock.idStock]" >Add Prediction</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

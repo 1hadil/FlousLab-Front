@@ -1,0 +1,36 @@
+.course-list {
+    margin: 20px;
+  }
+  
+  .courses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .course-card {
+    padding: 15px;
+  }
+  .contest-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Les cartes passent à la ligne si nécessaire */
+    gap: 16px; /* Espacement entre les cartes */
+    justify-content: flex-start; /* Aligne les cartes à gauche */
+  }
+  
+  .contest-card {
+    flex: 1 1 calc(33.33% - 16px); /* 3 cartes par ligne */
+    box-sizing: border-box;
+  }
+  
+  .contest-details {
+    height: 100%; /* Uniformise la hauteur des cartes */
+    padding: 16px;
+  }
+  .empty-message {
+    text-align: center;
+    color: #757575;
+    font-size: 16px;
+    margin: 16px 0;
+  }
+  

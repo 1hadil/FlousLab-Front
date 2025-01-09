@@ -1,0 +1,83 @@
+<div class="container">
+ 
+  
+
+     <mat-card *ngIf="!selectedLesson">
+        <mat-card-header>
+            <mat-card-title>lessons List</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Date start</th>
+                    <th>Date end</th>
+                    <th>Formations</th>
+                    <th>duration</th>
+                    <th>Hour</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let lesson of lessons">
+                    <td>{{ lesson.name }}</td>
+                    <td>{{ lesson.description }}</td>
+                    <td>{{ lesson.startDate }}</td>
+                    <td>{{ lesson.endDate }}</td>
+                    <td>{{ lesson.course?.name }}</td>
+                    <td>{{ lesson.duration }}h</td>
+                    <td>{{ lesson.time }}h</td>
+                    <td>
+                      <button mat-raised-button color="primary" (click)="selectLesson(lesson)">update</button>
+                      <button mat-raised-button color="warn" (click)="deleteLesson(lesson.idLesson)">delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </mat-card-content>
+    
+     </mat-card>
+     <mat-card class="mat-elevation-z4" *ngIf="selectedLesson">
+        <mat-card-header>
+          <mat-card-title>update</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form (ngSubmit)="updateLesson()">
+                <div class="mb-3">
+                  <label for="editName" class="form-label">Name</label>
+                  <input id="editName" [(ngModel)]="selectedLesson.name" name="editName" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <label for="editDescription" class="form-label">Description</label>
+                  <input id="editDescription" [(ngModel)]="selectedLesson.description" name="editDescription" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <label for="editStartDate" class="form-label">Date start</label>
+                  <input id="editStartDate" type="date" [(ngModel)]="selectedLesson.startDate" name="editStartDate" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <label for="editEndDate" class="form-label">Date end</label>
+                  <input id="editEndDate" type="date" [(ngModel)]="selectedLesson.endDate" name="editEndDate" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <label for="editduree" class="form-label">Duree</label>
+                  <input id="editduree" [(ngModel)]="selectedLesson.duree" name="editduree" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="edittime" class="form-label">Heures</label>
+                    <input id="edittime" [(ngModel)]="selectedLesson.time" name="edittime" class="form-control" />
+                  </div>
+                <button type="submit" mat-raised-button  color="primary">Update</button>
+                <button (click)="selectedLesson = null" mat-raised-button  color="warn">cancel</button>
+        
+              </form>
+        </mat-card-content>
+    
+        </mat-card>
+  
+    
+   
+  </div>
+  
