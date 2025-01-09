@@ -1,0 +1,42 @@
+
+  <mat-card>
+      <mat-card-header>
+          <mat-card-title>  Add course</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form (ngSubmit)="addLesson()" class="mb-4">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" matInput  [(ngModel)]="newLesson.name" name="name" class="form-control" />
+            </div>
+            
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <input id="description" [(ngModel)]="newLesson.description" name="description" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="startDate" class="form-label">Date Start</label>
+              <input id="startDate" type="date" [(ngModel)]="newLesson.startDate" name="startDate" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="endDate" class="form-label">Date End</label>
+              <input id="endDate" type="date" [(ngModel)]="newLesson.endDate" name="endDate" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="duree" class="form-label">Duree</label>
+              <input id="duree" [(ngModel)]="newLesson.duree" name="duree" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="duree" class="form-label">Heures</label>
+              <input id="duree" [(ngModel)]="newLesson.time" name="time" class="form-control" />
+            </div>
+            <button type="submit" mat-raised-button color="primary" >add</button>
+            <a mat-raised-button color="warn"  routerLink="/ui-components/courses">back</a>
+
+          </form>      </mat-card-content>
+ 
+  </mat-card>
+    <!-- Ajouter une leçon -->
+    
+ 

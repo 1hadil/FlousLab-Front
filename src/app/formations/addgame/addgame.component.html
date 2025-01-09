@@ -1,0 +1,30 @@
+<mat-card class="add-contest-card">
+    <mat-card-header>
+      <mat-card-title>Add Game</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="addGame()" class="add-contest-form">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="newGame.name" name="name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="newGame.description" name="description" required />
+        </mat-form-field>
+
+    
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>level</mat-label>
+          <input matInput [(ngModel)]="newGame.level" name="level" required />
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Add Game</button>
+          <a mat-raised-button color="warn"  routerLink="/ui-components/contests">back</a>
+
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>

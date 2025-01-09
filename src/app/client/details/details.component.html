@@ -1,0 +1,92 @@
+<div class="course-list">
+    <!-- Section pour les cours -->
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title>Liste des Cours</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+    <div *ngIf="lessons.length === 0" class="empty-message">
+        Aucun cours disponible pour le moment.
+      </div>
+      <div class="courses-container" *ngIf="lessons.length > 0">
+        <div *ngFor="let lesson of lessons">
+          <mat-card class="mat-elevation-z4 course-card">
+            <mat-card-title>Name :{{ lesson.name }}</mat-card-title>
+            <mat-card-content>
+                <p><strong> Description:</strong> {{ lesson.description }}</p>
+
+              <p><strong>Date de début:</strong> {{ lesson.startDate }}</p>
+              <p><strong>Date de fin:</strong> {{ lesson.endDate }}</p>
+              <p><strong>Formation:</strong> {{ lesson.course?.name }}</p>
+              <p><strong>Durée:</strong> {{ lesson.duree }}h</p>
+              <p><strong>Heures:</strong> {{ lesson.time }}h</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    <!-- Section pour les concours -->
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title>Liste des Concours</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+    <div *ngIf="contests.length === 0" class="empty-message">
+        Aucun concours disponible pour le moment.
+      </div>
+      <div class="contest-cards-container" *ngIf="contests.length > 0">
+        <div *ngFor="let contest of contests; let i = index" class="contest-card">
+          <mat-card class="contest-details" *ngIf="!open"> 
+            <mat-card-title>{{ contest.name }}</mat-card-title>
+            <mat-card-subtitle>{{ contest.description }}</mat-card-subtitle>
+            <mat-card-content>
+              <p><strong>#ID:</strong> {{ i + 1 }}</p>
+              <p><strong>Date:</strong> {{ contest.date | date }}</p>
+              <p><strong>Reward:</strong> {{ contest.reward }}</p>
+              <p><strong>Formation:</strong> {{ contest.course?.name }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="getgame(contest.idContest)"
+              >
+                See Game
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <div *ngIf="games.length === 0 && open" class="empty-message">
+        Aucun jeux disponible pour le moment.
+        <button
+        mat-raised-button
+        color="primary"
+        (click)="open=false"
+      >
+        close
+      </button>
+      </div>
+      <div class="contest-cards-container" *ngIf="games.length > 0">
+        <div *ngFor="let contest of games; let i = index" class="contest-card">
+          <mat-card class="contest-details" *ngIf="open"> 
+            <mat-card-title>{{ contest.name }}</mat-card-title>
+            <mat-card-subtitle>{{ contest.description }}</mat-card-subtitle>
+            <mat-card-content>
+              <p><strong>#ID:</strong> {{ i + 1 }}</p>
+              <p><strong>level:</strong> {{ contest.level }}</p>
+              <p><strong>Concours:</strong> {{ contest.contest?.name }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="open=false"
+              >
+                close
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+  </div>
+  

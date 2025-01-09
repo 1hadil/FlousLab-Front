@@ -1,0 +1,60 @@
+<mat-card >
+  <mat-card-title class="text-center">Forecast List</mat-card-title>
+  <mat-card-content>
+    <table class="table table-bordered ">
+      <thead >
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Date</th>
+          <th scope="col">premium margin</th>
+          <th>Claim Probability</th>
+         <th scope="col">estimated</th>
+            <th scope="col">Premuims</th>
+            <th scope="col">User Email</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let forecast of forecasts; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ forecast.type }}</td>
+          <td>{{ forecast.date }}</td>
+          <td>{{ forecast.premiummargin }}</td>
+          <td>{{ forecast.claimProbability }}</td>
+          <td>{{ forecast.estimated_Compensation_Amount }}</td>
+          <td>
+            <a
+              
+              role="button"
+              mat-raised-button color="primary"
+              [routerLink]="['/ui-components/premiums']"
+              [queryParams]="{ data: forecast.premiums | json }"
+            >
+              View Premiums
+            </a>
+          </td>
+          
+          <td>{{ forecast.user?.email }}</td>
+          <td>
+            <button 
+            mat-raised-button [style.background-color]="'#0277BD'"
+             
+              (click)="deleteForecast(forecast.idForecast)">
+              Delete
+            </button>
+            <button 
+              
+              mat-raised-button color="dark"
+              [routerLink]="'/ui-components/update-forecast/' + forecast.idForecast">
+              Update
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+
+

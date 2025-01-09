@@ -1,0 +1,52 @@
+<!-- Conteneur pour l'image de fond -->  <div class="background-container">     </div> 
+  <mat-card>
+    <mat-card-title class="text-center">Insurance List</mat-card-title>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Policy</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Coverage Amount</th>
+            <th>Client Premium</th>
+            <th>State</th>
+            <th>Type</th>
+            <th>List Premiums</th>
+            <th>Add Claims</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let insurance of insurances">
+            <td>{{insurance.idInsurance}}</td>
+            <td>{{ insurance.policy }}</td>
+            <td>{{ insurance.startDate | date }}</td>
+            <td>{{ insurance.endDate | date }}</td>
+            <td>{{ insurance.clientcoverageamount }}</td>
+            <td>{{ insurance.clientpremium }}</td>
+            <td>{{ insurance.state }}</td>
+            <td>{{ insurance.type }}</td>
+            <td>  <a
+              mat-raised-button [style.background-color]="'#0277BD'"
+              role="button"
+              [routerLink]="['/ui-components/listpremiums']"
+              [queryParams]="{ data: insurance.premiums | json }"
+            >
+              Premiums
+            </a></td>
+            <td>
+              <a
+                mat-raised-button [style.background-color]="'#0277BD'"
+                role="button"
+                [routerLink]="['/ui-components/addclaims',insurance.idInsurance]"
+               
+              >
+                Add Claims
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>

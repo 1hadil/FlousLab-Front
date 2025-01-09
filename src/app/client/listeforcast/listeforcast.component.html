@@ -1,0 +1,54 @@
+<!-- Conteneur pour l'image de fond -->  <div class="background-container">     </div> 
+ <mat-card>
+    <mat-card-title class="text-center">Forcast List</mat-card-title>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Estimated Compensation</th>
+            <th>Premium Margin</th>
+            <th>Type</th>
+            <th>Stocks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let claim of forecasts">
+            <td>{{ claim.idForecast }}</td>
+            <td>{{ claim.date | date }}</td>
+            <td>{{ claim.estimated_Compensation_Amount }}</td>
+            <td>{{ claim.premiummargin }}</td>
+            <td>{{ claim.type }}</td>
+            <td>
+              <button mat-raised-button [style.background-color]="'#0277BD'" (click)="togglePremiums(claim)">View Premiums</button>
+          
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  
+
+
+
+  <!-- Nested Table for Premiums -->
+  <div *ngFor="let forecast of forecasts">
+    <table mat-table [dataSource]="forecast.premiums" class="mat-elevation-z4" *ngIf="forecast.showPremiums">
+      <!-- Premium Column -->
+      <ng-container matColumnDef="premium">
+        <th mat-header-cell *matHeaderCellDef> Premium </th>
+        <td mat-cell *matCellDef="let premium"> {{ premium.premium }} </td>
+      </ng-container>
+  
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let premium"> {{ premium.date | date }} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="premiumColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: premiumColumns;"></tr>
+    </table>
+  </div>
+  

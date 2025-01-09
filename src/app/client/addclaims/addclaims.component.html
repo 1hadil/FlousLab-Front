@@ -1,0 +1,22 @@
+
+
+<!-- Formulaire pour ajouter une réclamation -->
+<mat-card class="mb-4">
+  <mat-card-title class="text-center">Add New Claim</mat-card-title>
+  <mat-card-content>
+    <form (ngSubmit)="addClaim()" class="form-container">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput type="text" [(ngModel)]="newClaim.amount" name="amount" placeholder="Enter amount" required />
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Details</mat-label>
+        <input matInput type="text" [(ngModel)]="newClaim.details" name="details" placeholder="Enter details" required />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width">Add Claim</button>
+      <a mat-raised-button color="warn" routerLink="/ui-components/list-insurance" class="full-width">Retour</a>
+    </form>
+  </mat-card-content>
+</mat-card>

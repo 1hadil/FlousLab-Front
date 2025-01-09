@@ -1,0 +1,15 @@
+<div class="prediction-container" *ngIf="!isLoading">
+    <mat-card *ngFor="let x of prediction" class="prediction-card">
+      <mat-card-header>
+        <mat-card-title>Premium for Insurance</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Date:</strong> {{ x.date }}</p>
+        <p><strong>Predicted Premium:</strong> {{ x.premium }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Vous pouvez remplacer ce contenu par un composant ou une animation -->
+    <p>Loading data, please wait...</p>
+  </div>

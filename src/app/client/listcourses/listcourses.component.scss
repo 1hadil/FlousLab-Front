@@ -1,0 +1,14 @@
+.course-list {
+    margin: 20px;
+  }
+  
+  .courses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .course-card {
+    padding: 15px;
+  }
+  

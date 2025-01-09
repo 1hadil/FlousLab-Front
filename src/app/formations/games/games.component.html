@@ -1,0 +1,95 @@
+<div>
+    <h1>Game Management</h1>
+
+    <mat-card *ngIf="!selectedGame">
+        <mat-card-header>
+            <mat-card-title>    List Games</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table table-bordered">
+                <thead >
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Level</th>
+                    <th>Contest</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let game of games; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ game.name }}</td>
+                    <td>{{ game.description }}</td>
+                    <td>{{ game.level }}</td>
+                    <td>{{ game.contest?.name }}</td>
+                    <td>
+                      <button mat-raised-button color="primary" class="btn btn-warning btn-sm me-2" (click)="selectGame(game)">
+                        Edit
+                      </button>
+                      <button mat-raised-button color="warn" (click)="deleteGame(game.idGame)">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </mat-card-content>
+      
+      
+    </mat-card>
+
+    <mat-card *ngIf="selectedGame">
+        <mat-card-header>
+            <mat-card-title>update</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form (ngSubmit)="updateGame()">
+                <div class="row g-2">
+                  <div class="col-md-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="selectedGame.name"
+                      name="editName"
+                      class="form-control"
+                      placeholder="Name"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="selectedGame.description"
+                      name="editDescription"
+                      class="form-control"
+                      placeholder="Description"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="selectedGame.level"
+                      name="editLevel"
+                      class="form-control"
+                      placeholder="Level"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button type="submit" mat-raised-button color="primary">Update</button>
+                  <button type="button" mat-raised-button color="warn" (click)="selectedGame = null">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+        </mat-card-content>
+      
+       
+    </mat-card>
+  
+  
+  </div>
+  

@@ -1,0 +1,34 @@
+<mat-card class="add-contest-card">
+    <mat-card-header>
+      <mat-card-title>Add Contest</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="addContest()" class="add-contest-form">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="newContest.name" name="name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="newContest.description" name="description" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Date</mat-label>
+          <input matInput [(ngModel)]="newContest.date" name="date" type="date" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Reward</mat-label>
+          <input matInput [(ngModel)]="newContest.reward" name="reward" required />
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Add Contest</button>
+          <a mat-raised-button color="warn"  routerLink="/ui-components/courses">back</a>
+
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>

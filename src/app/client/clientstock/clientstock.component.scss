@@ -1,0 +1,18 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si nécessaire */
+    gap: 16px; /* Espace entre les cartes */
+    justify-content: flex-start; /* Aligne les cartes sur la ligne de départ */
+  }
+  
+  .stock-card {
+    width: 200px; /* Largeur des cartes */
+    flex-grow: 1; /* Permet aux cartes de s'étendre si nécessaire */
+    margin: 8px; /* Espace autour des cartes */
+  }
+  .stock-avatar {
+    background-color: #3f51b5;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }

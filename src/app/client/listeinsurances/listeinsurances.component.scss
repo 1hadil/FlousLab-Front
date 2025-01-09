@@ -1,0 +1,60 @@
+.mat-card {
+    position: relative;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+  }
+  
+  .background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./../../../assets/images/finback.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 1;
+  }
+  
+  .form-container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Styles pour la table */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Style pour les cellules de la table */
+  th, td {
+    border: 2px solid #333; /* Bordures sombres */
+    padding: 10px;
+    color: #000; /* Texte noir */
+    background-color: rgba(255, 255, 255, 0.7); /* Fond blanc semi-transparent */
+  }
+  
+  /* Style pour l'en-tête de la table */
+  thead tr th {
+    background-color: rgba(245, 245, 245, 0.9); /* En-tête plus opaque */
+    font-weight: bold;
+    color: #000;
+    border: 2px solid #333;
+  }
+  
+  /* Style pour le bouton dans la table */
+  .mat-raised-button {
+    opacity: 1 !important; /* Force l'opacité complète pour le bouton */
+  }
+  
+  /* Style pour le texte dans la table */
+  td, th {
+    position: relative;
+    z-index: 2;
+  }
+ 
+  

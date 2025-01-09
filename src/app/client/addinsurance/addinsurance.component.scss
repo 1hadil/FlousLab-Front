@@ -1,0 +1,19 @@
+.prediction-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .prediction-card {
+    width: 300px;
+  }
+  .loading-spinner {
+    text-align: center;
+    margin: 20px;
+    font-size: 18px;
+  }
+  .loading-spinner {
+  text-align: center;
+  margin: 20px;
+  font-size: 18px;
+}

@@ -1,0 +1,46 @@
+
+  
+<!-- Conteneur pour l'image de fond -->  <div class="background-container">     </div> 
+<mat-card>
+    <mat-card-title class="text-center">Claims List</mat-card-title>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Insurance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let claim of claims">
+            <td>{{ claim.idClaim }}</td>
+            <td>{{ claim.date | date }}</td>
+            <td>{{ claim.amount }}</td>
+            <td>{{ claim.status }}</td>
+            <td>{{ claim.details }}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="viewClaim(claim)">See Insurance</button>
+          
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="selectinssurance && selectinssurance.insurance">
+    <mat-card-title class="text-center">Insurance Details</mat-card-title>
+    <mat-card-content>
+      <p><strong>Policy:</strong> {{ selectinssurance.insurance.policy }}</p>
+      <p><strong>Start Date:</strong> {{ selectinssurance.insurance.startDate }}</p>
+      <p><strong>End Date:</strong> {{ selectinssurance.insurance.endDate }}</p>
+      <p><strong>Amount Covered:</strong> {{ selectinssurance.insurance.clientcoverageamount }}</p>
+      <p><strong>Premium:</strong> {{ selectinssurance.insurance.clientpremium }}</p>
+      <p><strong>State:</strong> {{ selectinssurance.insurance.state }}</p>
+
+      <button mat-raised-button [style.background-color]="'#0277BD'" (click)="closeInsuranceDetails()">Close</button>
+    </mat-card-content>
+  </mat-card>
+ 

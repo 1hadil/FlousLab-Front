@@ -1,0 +1,84 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Update Forecast</h2>
+    <form [formGroup]="forecastForm" (ngSubmit)="updateForecast()">
+      <!-- Type -->
+      <div class="mb-3">
+        <label for="type" class="form-label">Type:</label>
+        <input 
+          id="type" 
+          formControlName="type" 
+          type="text" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': forecastForm.get('type')?.invalid && forecastForm.get('type')?.touched}" 
+        />
+        <div *ngIf="forecastForm.get('type')?.invalid && forecastForm.get('type')?.touched" class="invalid-feedback">
+          Type is required and must have at least 3 characters.
+        </div>
+      </div>
+  
+      <!-- Premium Margin -->
+      <div class="mb-3">
+        <label for="premiummargin" class="form-label">Premium Margin:</label>
+        <input 
+          id="premiummargin" 
+          formControlName="premiummargin" 
+          type="text" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': forecastForm.get('premiummargin')?.invalid && forecastForm.get('premiummargin')?.touched}" 
+        />
+        <div *ngIf="forecastForm.get('premiummargin')?.invalid && forecastForm.get('premiummargin')?.touched" class="invalid-feedback">
+          Premium Margin is required.
+        </div>
+      </div>
+  
+      <!-- Estimated Compensation Amount -->
+      <div class="mb-3">
+        <label for="estimated" class="form-label">Estimated Compensation Amount:</label>
+        <input 
+          id="estimated" 
+          formControlName="estimated_Compensation_Amount" 
+          type="number" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': forecastForm.get('estimated_Compensation_Amount')?.invalid && forecastForm.get('estimated_Compensation_Amount')?.touched}" 
+        />
+        <div *ngIf="forecastForm.get('estimated_Compensation_Amount')?.invalid && forecastForm.get('estimated_Compensation_Amount')?.touched" class="invalid-feedback">
+          Estimated Compensation Amount must be a positive number.
+        </div>
+      </div>
+  
+      <!-- Claim Probability -->
+      <div class="mb-3">
+        <label for="claimProbability" class="form-label">Claim Probability:</label>
+        <input 
+          id="claimProbability" 
+          formControlName="claimProbability" 
+          type="number" 
+          step="0.01" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': forecastForm.get('claimProbability')?.invalid && forecastForm.get('claimProbability')?.touched}" 
+        />
+        <div *ngIf="forecastForm.get('claimProbability')?.invalid && forecastForm.get('claimProbability')?.touched" class="invalid-feedback">
+          Claim Probability must be between 0 and 1.
+        </div>
+      </div>
+  
+      <!-- Date -->
+      <div class="mb-3">
+        <label for="date" class="form-label">Date:</label>
+        <input 
+          id="date" 
+          formControlName="date" 
+          type="date" 
+          class="form-control" 
+          [ngClass]="{'is-invalid': forecastForm.get('date')?.invalid && forecastForm.get('date')?.touched}" 
+        />
+        <div *ngIf="forecastForm.get('date')?.invalid && forecastForm.get('date')?.touched" class="invalid-feedback">
+          Date is required.
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="forecastForm.invalid">Update</button>
+    </form>
+  </div>
+  

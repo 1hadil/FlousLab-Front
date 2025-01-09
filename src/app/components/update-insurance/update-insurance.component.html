@@ -1,0 +1,46 @@
+<div class="container mt-5">
+    <h2>Update Insurance</h2>
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="policy" class="form-label">Policy</label>
+        <input type="text" id="policy" class="form-control" formControlName="policy" />
+      </div>
+
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" id="startDate" class="form-control" formControlName="startDate" />
+      </div>
+      <div class="mb-3">
+        <label for="endDate" class="form-label">End Date</label>
+        <input type="date" id="endDate" class="form-control" formControlName="endDate" />
+      </div>
+      <div class="mb-3">
+        <label for="clientcoverageamount" class="form-label">Client Coverage Amount</label>
+        <input type="number" id="clientcoverageamount" class="form-control" formControlName="clientcoverageamount" />
+      </div>
+      <div class="mb-3">
+        <label for="clientpremium" class="form-label">Client Premium</label>
+        <input type="number" id="clientpremium" class="form-control" formControlName="clientpremium" />
+      </div>
+      <div class="mb-3">
+        <label for="state" class="form-label">State</label>
+        <select id="state" class="form-select" formControlName="state">
+          <option value="Archived">Archived</option>
+          <option value="Denied">Denied</option>
+          <option value="Pending">Pending</option>
+          <option value="Accepted">Accepted</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">type</label>
+        <select id="type" class="form-select" formControlName="type">
+          <option value="stock_insurance">stock_insurance</option>
+          <option value="bond_insurance">bond_insurance</option>
+          <option value="Currency_insurance">Currency_insurance</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!updateForm.valid">Update</button>
+      <button type="button" class="btn btn-secondary ms-2" routerLink="/ui-components/insurance">Cancel</button>
+    </form>
+  </div>
+  
